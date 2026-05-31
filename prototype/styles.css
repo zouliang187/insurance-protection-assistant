@@ -188,6 +188,17 @@ h4 {
   border-radius: 8px;
 }
 
+.disclaimer {
+  max-width: 640px;
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  color: var(--danger);
+  background: #fff6ef;
+  border: 1px solid #efd4c7;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
 .hero-visual {
   overflow: hidden;
   background: var(--white);
