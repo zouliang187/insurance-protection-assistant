@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>给父母买保险 | 公益保险配置助手</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="回到首页">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>保障先知</span>
+      </a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="#top">父母保险选择器</a>
+        <a href="#compare">产品字段</a>
+        <a href="#learn">保险入门</a>
+        <a href="#about">公益说明</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">公益保险科普与保障配置工具</p>
+          <h1>先看保障缺口，再判断父母适合什么保险。</h1>
+          <p class="hero-text">
+            这个原型帮助你用几分钟梳理父母年龄、医保、健康情况和预算，得到一份基础保障路径和投保前核对清单。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#selector">查看当前结果</a>
+            <a class="button secondary" href="#about">查看边界</a>
+          </div>
+          <div class="trust-strip" aria-label="平台原则">
+            <span>不卖保险</span>
+            <span>不做佣金排名</span>
+            <span>不承诺投保或理赔结果</span>
+          </div>
+        </div>
+        <form class="question-panel hero-question-panel" id="selectorForm">
+          <div class="mini-heading">
+            <p class="eyebrow">父母保险选择器</p>
+            <h2>先回答这 6 个问题</h2>
+          </div>
+
+          <fieldset>
+            <legend>1. 你想先为谁判断？</legend>
+            <div class="option-grid three">
+              <label><input type="radio" name="parentRole" value="父亲" checked />父亲</label>
+              <label><input type="radio" name="parentRole" value="母亲" />母亲</label>
+              <label><input type="radio" name="parentRole" value="父母" />父母都要看</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>2. 父母年龄大致在哪个区间？</legend>
+            <div class="option-grid">
+              <label><input type="radio" name="ageBand" value="50-55" checked />50-55 岁</label>
+              <label><input type="radio" name="ageBand" value="56-60" />56-60 岁</label>
+              <label><input type="radio" name="ageBand" value="61-65" />61-65 岁</label>
+              <label><input type="radio" name="ageBand" value="66-70" />66-70 岁</label>
+              <label><input type="radio" name="ageBand" value="71+" />71 岁以上</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>3. 医保状态是什么？</legend>
+            <div class="option-grid three">
+              <label><input type="radio" name="medicalInsurance" value="yes" checked />有医保</label>
+              <label><input type="radio" name="medicalInsurance" value="no" />没有医保</label>
+              <label><input type="radio" name="medicalInsurance" value="unknown" />不确定</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>4. 健康情况最接近哪一类？</legend>
+            <div class="option-stack">
+              <label><input type="radio" name="healthStatus" value="normal" checked />近几年体检基本正常</label>
+              <label><input type="radio" name="healthStatus" value="minor" />有高血压、糖尿病、结节、体检异常等常见情况</label>
+              <label><input type="radio" name="healthStatus" value="serious" />有重大疾病、手术或住院史</label>
+              <label><input type="radio" name="healthStatus" value="unknown" />不清楚，需要先问父母</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>5. 每人每年预算大致是多少？</legend>
+            <div class="option-grid">
+              <label><input type="radio" name="budget" value="low" checked />300 元以内</label>
+              <label><input type="radio" name="budget" value="middle" />300-1000 元</label>
+              <label><input type="radio" name="budget" value="high" />1000-3000 元</label>
+              <label><input type="radio" name="budget" value="unknown" />暂不确定</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>6. 已有保障有哪些？</legend>
+            <div class="option-stack">
+              <label><input type="checkbox" name="existingCoverage" value="百万医疗险" />已有百万医疗险</label>
+              <label><input type="checkbox" name="existingCoverage" value="惠民保" />已有惠民保</label>
+              <label><input type="checkbox" name="existingCoverage" value="意外险" />已有意外险</label>
+              <label><input type="checkbox" name="existingCoverage" value="重疾险或防癌险" />已有重疾险或防癌险</label>
+              <label><input type="checkbox" name="existingCoverage" value="不清楚或没有" checked />不清楚或没有</label>
+            </div>
+          </fieldset>
+        </form>
+      </section>
+
+      <section class="section selector-section" id="selector">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">初步结果</p>
+            <h2>根据选择生成保障路径</h2>
+          </div>
+          <div class="hero-visual mini-visual" aria-label="家庭保障路径示意图">
+            <canvas id="riskCanvas" width="520" height="420"></canvas>
+          </div>
+        </div>
+
+        <div class="selector-layout result-layout">
+          <aside class="result-panel" aria-live="polite">
+            <div class="result-header">
+              <p class="eyebrow">初步结果</p>
+              <h3 id="resultTitle">优先确认医保，再补低门槛保障</h3>
+              <p id="resultSummary">根据当前选择，系统会生成一条基础保障路径和投保前核对清单。</p>
+            </div>
+
+            <div class="result-block">
+              <h4>保障优先级</h4>
+              <ol id="priorityList"></ol>
+            </div>
+
+            <div class="result-block">
+              <h4>投保前核对</h4>
+              <ul id="checklist"></ul>
+            </div>
+
+            <div class="result-block warning">
+              <h4>需要谨慎的地方</h4>
+              <p id="riskNote"></p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section muted" id="compare">
+        <div class="section-heading">
+          <p class="eyebrow">产品库不会做简单排名</p>
+          <h2>先比较条款字段，而不是只看保费</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>字段</th>
+                <th>为什么重要</th>
+                <th>用户要问什么</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>健康告知</td>
+                <td>决定能否正常投保、除外或拒保。</td>
+                <td>父母的慢病、结节、住院史是否涉及？</td>
+              </tr>
+              <tr>
+                <td>续保条件</td>
+                <td>影响未来年龄变大或理赔后的保障稳定性。</td>
+                <td>是否保证续保？保证几年？停售怎么办？</td>
+              </tr>
+              <tr>
+                <td>免赔额</td>
+                <td>决定小额费用是否实际赔得到。</td>
+                <td>医保报销后还要自付多少才开始赔？</td>
+              </tr>
+              <tr>
+                <td>既往症</td>
+                <td>父母常见病史可能直接影响赔付。</td>
+                <td>既往症赔不赔？赔付比例是否降低？</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="learn">
+        <div class="section-heading">
+          <p class="eyebrow">推荐先读</p>
+          <h2>把复杂问题拆成能理解的文章</h2>
+        </div>
+        <div class="article-list">
+          <a href="#" class="article-row">
+            <span>01</span>
+            <strong>有医保，为什么还可能因大病陷入财务困境？</strong>
+            <em>医保边界</em>
+          </a>
+          <a href="#" class="article-row">
+            <span>02</span>
+            <strong>百万医疗险和惠民保有什么区别？</strong>
+            <em>险种对比</em>
+          </a>
+          <a href="#" class="article-row">
+            <span>03</span>
+            <strong>给父母买保险前要问清楚的 20 个问题</strong>
+            <em>核对清单</em>
+          </a>
+          <a href="#" class="article-row">
+            <span>04</span>
+            <strong>健康告知到底怎么读？</strong>
+            <em>投保基础</em>
+          </a>
+        </div>
+      </section>
+
+      <section class="section about-section" id="about">
+        <div>
+          <p class="eyebrow">公益与合规边界</p>
+          <h2>这个工具只做科普和路径参考</h2>
+        </div>
+        <div class="about-copy">
+          <p>
+            本原型不提供保险购买链接，不根据佣金展示产品，也不承诺任何产品一定能投保或理赔。实际结果以保险公司条款、核保和理赔结论为准。
+          </p>
+          <p>
+            如果父母有重大疾病、手术、住院史或健康情况不清楚，应先整理病历和体检资料，再咨询具备资质的专业人员。
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>保障先知 Prototype v0.1</span>
+      <span>最后更新：2026-05-21</span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
